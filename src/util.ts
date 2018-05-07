@@ -322,7 +322,7 @@ export class Util {
 
     const parsedResp = extend(
         true, {err: err || null}, resp && util.parseHttpRespMessage(resp),
-        body && util.parseHttpRespBody(body));
+        body ? util.parseHttpRespBody(body) : body);
 
     callback(parsedResp.err, parsedResp.body, parsedResp.resp);
   }
