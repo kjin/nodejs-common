@@ -211,7 +211,8 @@ export class Service {
     if (reqOpts.shouldReturnStream) {
       return this.makeAuthenticatedRequest(reqOpts) as r.Request;
     } else {
-      return pify(this.makeAuthenticatedRequest)(reqOpts);
+      return pify(this.makeAuthenticatedRequest, {multiArgs: true})(reqOpts)
+          .then(args => args[1]);
     }
   }
 
